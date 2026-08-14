@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aidoudi El Fakhar Arrazi — Software Engineer &amp; Photographer</title>
+<meta name="description" content="Portfolio of Aidoudi El Fakhar Arrazi — software development, networking &amp; FANET research, and photography." />
+
+<!-- ===================================================================
+  HOW TO EDIT THIS FILE
+  - Search for "EDIT:" comments throughout — those are the spots you'll
+    want to personalize (links, email, CV file, project details).
+  - To add photography: scroll to the "PHOTO GALLERY DATA" section in
+    the <script> near the bottom and add entries to the `photos` array.
+  - Everything is contained in this one file: HTML + CSS + JS.
+=================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   0. TOKENS
+========================================================= */
+:root{
+  --bg:#0a0d13;
+  --bg-alt:#0d1119;
+  --surface:#131824;
+  --surface-hi:#1a2130;
+  --border:#232a3a;
+  --border-soft:#1a2130;
+
+  --text:#e9ebf2;
+  --text-dim:#9aa1b4;
+  --text-faint:#5b6377;
+
+  --signal:#5b8def;      /* tech / network accent */
+  --signal-soft:rgba(91,141,239,.14);
+  --signal-line:rgba(91,141,239,.35);
+
+  --aperture:#e8a54b;    /* photography accent */
+  --aperture-soft:rgba(232,165,75,.14);
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  --nav-h:76px;
+  --max:1180px;
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  /* subtle vignette / grain-free ambient glow */
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(91,141,239,.09), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(232,165,75,.05), transparent 55%);
+  pointer-events:none;
+  z-index:0;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;margin:0;padding:0;}
+section{position:relative;z-index:1;}
+::selection{background:var(--signal);color:#0a0d13;}
+
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:600;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal);
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  margin-bottom:1.1rem;
+}
+.eyebrow::before{
+  content:"";
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--signal);
+  box-shadow:0 0 0 3px var(--signal-soft);
+  flex-shrink:0;
+}
+.eyebrow.amber{color:var(--aperture);}
+.eyebrow.amber::before{background:var(--aperture);box-shadow:0 0 0 3px var(--aperture-soft);}
+
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+section{scroll-margin-top:var(--nav-h);}
+
+.section-pad{padding:140px 0;}
+@media(max-width:768px){.section-pad{padding:96px 0;}}
+
+.section-head{
+  max-width:640px;
+  margin-bottom:64px;
+}
+.section-head h2{
+  font-size:clamp(1.9rem,3.6vw,2.6rem);
+}
+.section-head p{
+  color:var(--text-dim);
+  font-size:1.02rem;
+  margin-top:14px;
+}
+
+/* buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  font-family:var(--font-mono);
+  font-size:.82rem;
+  letter-spacing:.03em;
+  padding:14px 24px;
+  border-radius:2px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:transform .35s var(--ease), background .25s, border-color .25s, color .25s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{
+  background:var(--signal);
+  color:#0a0d13;
+  font-weight:500;
+}
+.btn-primary:hover{background:#78a3f5;}
+.btn-outline{
+  border-color:var(--border);
+  color:var(--text);
+  background:transparent;
+}
+.btn-outline:hover{border-color:var(--signal);color:var(--signal);}
+
+/* reveal on scroll */
+.reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+}
+
+/* =========================================================
+   1. NAV
+========================================================= */
+header.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--nav-h);
+  z-index:100;
+  display:flex;
+  align-items:center;
+  background:rgba(10,13,19,.72);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid var(--border-soft);
+  transition:border-color .3s;
+}
+.nav-inner{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:var(--font-mono);
+  font-size:.95rem;
+  letter-spacing:.04em;
+}
+.brand-mark{
+  width:34px;height:34px;
+  flex-shrink:0;
+}
+.brand-name{color:var(--text);}
+.brand-name span{color:var(--text-faint);}
+
+nav.links{display:flex;align-items:center;gap:2.1rem;}
+nav.links a{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  position:relative;
+  padding:6px 0;
+  transition:color .25s;
+}
+nav.links a::after{
+  content:"";
+  position:absolute;left:0;bottom:0;
+  width:0;height:1px;
+  background:var(--signal);
+  transition:width .3s var(--ease);
+}
+nav.links a:hover{color:var(--text);}
+nav.links a:hover::after,
+nav.links a.active::after{width:100%;}
+nav.links a.active{color:var(--signal);}
+
+.nav-cta{display:flex;align-items:center;gap:14px;}
+.gh-icon{
+  width:20px;height:20px;color:var(--text-dim);
+  transition:color .25s, transform .25s;
+}
+.gh-icon:hover{color:var(--text);transform:translateY(-2px);}
+
+.burger{
+  display:none;
+  width:34px;height:34px;
+  border:1px solid var(--border);
+  background:transparent;
+  border-radius:2px;
+  cursor:pointer;
+  position:relative;
+}
+.burger span{
+  position:absolute;left:8px;right:8px;height:1px;background:var(--text);
+  transition:transform .3s var(--ease), opacity .3s;
+}
+.burger span:nth-child(1){top:12px;}
+.burger span:nth-child(2){top:17px;}
+.burger span:nth-child(3){top:22px;}
+.burger.open span:nth-child(1){transform:translateY(5px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-5px) rotate(-45deg);}
+
+.mobile-panel{
+  position:fixed;
+  top:var(--nav-h); left:0; right:0;
+  background:var(--bg-alt);
+  border-bottom:1px solid var(--border);
+  padding:12px 32px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  transform:translateY(-8px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s var(--ease), transform .28s var(--ease);
+  z-index:99;
+}
+.mobile-panel.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+.mobile-panel a{
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  padding:14px 4px;
+  border-bottom:1px solid var(--border-soft);
+}
+.mobile-panel a:hover{color:var(--signal);}
+
+@media(max-width:860px){
+  nav.links{display:none;}
+  .burger{display:block;}
+}
+
+/* side scroll-progress dots (desktop only) */
+.side-nav{
+  position:fixed;
+  right:28px; top:50%;
+  transform:translateY(-50%);
+  z-index:90;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.side-nav button{
+  width:9px;height:9px;
+  border-radius:50%;
+  border:1px solid var(--text-faint);
+  background:transparent;
+  cursor:pointer;
+  padding:0;
+  transition:all .3s var(--ease);
+}
+.side-nav button.active{
+  background:var(--signal);
+  border-color:var(--signal);
+  transform:scale(1.3);
+  box-shadow:0 0 0 4px var(--signal-soft);
+}
+@media(max-width:1024px){.side-nav{display:none;}}
+
+/* =========================================================
+   2. HERO
+========================================================= */
+.hero{
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  padding-top:var(--nav-h);
+  position:relative;
+}
+.hero-inner{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:60px 32px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:40px;
+  align-items:center;
+}
+.hero-text h1{
+  font-size:clamp(2.6rem,6.4vw,4.6rem);
+  line-height:1.04;
+  color:var(--text);
+}
+.hero-text h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg, var(--signal), var(--aperture));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero-role{
+  font-family:var(--font-mono);
+  font-size:.95rem;
+  color:var(--text-dim);
+  margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4em .6em;
+}
+.hero-role .dot{color:var(--text-faint);}
+.hero-intro{
+  margin-top:22px;
+  max-width:520px;
+  color:var(--text-dim);
+  font-size:1.05rem;
+}
+.hero-actions{
+  margin-top:38px;
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.hero-coords{
+  margin-top:52px;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text-faint);
+  letter-spacing:.05em;
+}
+
+.hero-art{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-art svg{width:100%;max-width:440px;height:auto;}
+.orbit-group{
+  transform-origin:200px 200px;
+  animation:spin 100s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pulse-line{
+  stroke-dasharray:6 10;
+  animation:dash 3.2s linear infinite;
+}
+@keyframes dash{to{stroke-dashoffset:-160;}}
+.node-dot{animation:blink 3.6s ease-in-out infinite;}
+.node-dot:nth-child(odd){animation-delay:1.1s;}
+@keyframes blink{0%,100%{opacity:.55;}50%{opacity:1;}}
+
+.scroll-cue{
+  position:absolute;
+  bottom:38px; left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.15em;
+  color:var(--text-faint);
+  text-transform:uppercase;
+}
+.scroll-cue .line{
+  width:1px;height:34px;
+  background:linear-gradient(var(--text-faint), transparent);
+  animation:scrolldown 2s ease-in-out infinite;
+}
+@keyframes scrolldown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}50.01%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:left;}
+  .hero-art{order:-1;max-width:280px;margin:0 auto 20px;}
+  .hero-art svg{max-width:240px;}
+}
+
+/* =========================================================
+   3. ABOUT
+========================================================= */
+.about-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:64px;
+  align-items:start;
+}
+.portrait-slot{
+  aspect-ratio:4/5;
+  border:1px dashed var(--border);
+  border-radius:3px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:var(--text-faint);
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  text-align:center;
+  padding:20px;
+  background:linear-gradient(160deg, var(--surface), var(--bg-alt));
+  position:relative;
+  overflow:hidden;
+}
+.portrait-slot svg{width:34px;height:34px;opacity:.5;}
+/* EDIT: replace this whole .portrait-slot block with
+   <img src="assets/portrait.jpg" alt="Aidoudi El Fakhar Arrazi" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
+*/
+
+.about-body p{color:var(--text-dim);font-size:1.02rem;margin:0 0 18px;}
+.about-body p strong{color:var(--text);font-weight:500;}
+
+.focus-strip{
+  margin-top:36px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--border-soft);
+  border-left:1px solid var(--border-soft);
+}
+.focus-item{
+  padding:20px 22px;
+  border-right:1px solid var(--border-soft);
+  border-bottom:1px solid var(--border-soft);
+}
+.focus-item .k{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.08em;
+  color:var(--text-faint);
+  text-transform:uppercase;
+}
+.focus-item .v{
+  margin-top:8px;
+  font-family:var(--font-display);
+  font-size:1rem;
+  color:var(--text);
+}
+@media(max-width:760px){
+  .about-grid{grid-template-columns:1fr;}
+  .portrait-slot{max-width:280px;}
+  .focus-strip{grid-template-columns:1fr;}
+}
+
+/* =========================================================
+   4. SKILLS
+========================================================= */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border-soft);
+  border:1px solid var(--border-soft);
+}
+.skill-card{
+  background:var(--bg);
+  padding:30px 26px;
+  transition:background .3s;
+}
+.skill-card:hover{background:var(--surface);}
+.skill-card h3{
+  font-size:.98rem;
+  color:var(--text);
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.skill-card h3 svg{width:18px;height:18px;color:var(--signal);}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text-dim);
+  border:1px solid var(--border);
+  padding:5px 10px;
+  border-radius:2px;
+  transition:border-color .25s, color .25s;
+}
+.skill-card:hover .tag{border-color:var(--border);}
+.tag:hover{border-color:var(--signal);color:var(--signal);}
+
+@media(max-width:900px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.skills-grid{grid-template-columns:1fr;}}
+
+/* =========================================================
+   5. PROJECTS
+========================================================= */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.project-card{
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:34px 30px;
+  background:linear-gradient(165deg, var(--surface), var(--bg));
+  display:flex;
+  flex-direction:column;
+  min-height:340px;
+  transition:transform .4s var(--ease), border-color .3s;
+  position:relative;
+  overflow:hidden;
+}
+.project-card:hover{transform:translateY(-6px);border-color:var(--signal-line);}
+.project-card .glow{
+  position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;
+  background:radial-gradient(circle, var(--signal-soft), transparent 70%);
+  pointer-events:none;
+}
+.project-tag{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--aperture);
+  margin-bottom:18px;
+}
+.project-card.tech .project-tag{color:var(--signal);}
+.project-card h3{font-size:1.35rem;margin-bottom:12px;}
+.project-card p{color:var(--text-dim);font-size:.94rem;flex-grow:1;}
+.project-links{
+  display:flex;gap:18px;margin-top:24px;
+  font-family:var(--font-mono);font-size:.78rem;
+}
+.project-links a{
+  display:flex;align-items:center;gap:6px;
+  color:var(--text-dim);
+  border-bottom:1px solid transparent;
+  padding-bottom:2px;
+  transition:color .25s, border-color .25s;
+}
+.project-links a:hover{color:var(--signal);border-color:var(--signal);}
+.project-links svg{width:14px;height:14px;}
+
+.project-card.cta{
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-style:dashed;
+}
+.project-card.cta svg{width:32px;height:32px;color:var(--text-faint);margin-bottom:16px;}
+.project-card.cta h3{font-size:1.1rem;color:var(--text);}
+.project-card.cta p{color:var(--text-faint);font-size:.88rem;margin-top:8px;flex-grow:0;}
+.project-card.cta:hover{border-color:var(--signal);}
+
+@media(max-width:900px){.projects-grid{grid-template-columns:1fr;}}
+
+/* =========================================================
+   6. RESEARCH (FANET flagship)
+========================================================= */
+.research-panel{
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface);
+  display:grid;
+  grid-template-columns:1fr .9fr;
+  overflow:hidden;
+}
+.research-copy{padding:56px;}
+.research-copy h3{font-size:1.7rem;margin-bottom:16px;}
+.research-copy p{color:var(--text-dim);margin-bottom:18px;}
+.research-list{margin:26px 0;}
+.research-list li{
+  display:flex;gap:12px;
+  font-size:.92rem;color:var(--text-dim);
+  padding:10px 0;
+  border-top:1px solid var(--border-soft);
+}
+.research-list li:first-child{border-top:none;}
+.research-list li svg{width:16px;height:16px;color:var(--signal);flex-shrink:0;margin-top:3px;}
+.research-visual{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(91,141,239,.12), transparent 60%),
+    var(--bg-alt);
+  display:flex;align-items:center;justify-content:center;
+  border-left:1px solid var(--border);
+  padding:30px;
+}
+.research-visual svg{width:100%;max-width:320px;}
+@media(max-width:900px){
+  .research-panel{grid-template-columns:1fr;}
+  .research-copy{padding:40px 28px;}
+  .research-visual{border-left:none;border-top:1px solid var(--border);padding:40px 28px;}
+}
+
+/* =========================================================
+   7. PHOTOGRAPHY
+========================================================= */
+.gallery-controls{
+  display:flex;gap:10px;flex-wrap:wrap;
+  margin-bottom:36px;
+}
+.filter-btn{
+  font-family:var(--font-mono);
+  font-size:.74rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:9px 16px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text-dim);
+  border-radius:20px;
+  cursor:pointer;
+  transition:all .25s;
+}
+.filter-btn:hover{color:var(--text);border-color:var(--text-dim);}
+.filter-btn.active{
+  background:var(--aperture);
+  border-color:var(--aperture);
+  color:#1a1206;
+}
+
+.gallery{
+  columns:4 260px;
+  column-gap:16px;
+}
+.gallery-item{
+  break-inside:avoid;
+  margin-bottom:16px;
+  border-radius:3px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid var(--border-soft);
+  cursor:pointer;
+}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform .6s var(--ease);
+}
+.gallery-item:hover img{transform:scale(1.045);}
+.gallery-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:16px 14px 12px;
+  background:linear-gradient(0deg, rgba(0,0,0,.75), transparent);
+  opacity:0;
+  transition:opacity .3s;
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  color:#f1f1f1;
+  letter-spacing:.03em;
+}
+.gallery-item:hover .gallery-cap{opacity:1;}
+
+.gallery-item.placeholder{
+  aspect-ratio:4/5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:var(--surface);
+  border:1px dashed var(--border);
+  color:var(--text-faint);
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  text-align:center;
+  padding:18px;
+  cursor:default;
+}
+.gallery-item.placeholder svg{width:26px;height:26px;opacity:.5;}
+.gallery-item.placeholder .ph-cat{color:var(--aperture);text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;}
+
+@media(max-width:900px){.gallery{columns:3 200px;}}
+@media(max-width:560px){.gallery{columns:2 140px;column-gap:10px;} .gallery-item{margin-bottom:10px;}}
+
+/* lightbox */
+.lightbox{
+  position:fixed;inset:0;
+  background:rgba(6,7,10,.96);
+  backdrop-filter:blur(6px);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s var(--ease);
+}
+.lightbox.open{opacity:1;pointer-events:auto;}
+.lightbox-inner{
+  max-width:90vw;max-height:88vh;
+  display:flex;flex-direction:column;
+  align-items:center;
+  transform:scale(.96);
+  transition:transform .35s var(--ease);
+}
+.lightbox.open .lightbox-inner{transform:scale(1);}
+.lightbox img{
+  max-width:90vw;max-height:76vh;
+  object-fit:contain;
+  border:1px solid #232a3a;
+}
+.lightbox-cap{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  color:var(--text-dim);
+  margin-top:16px;
+  letter-spacing:.03em;
+}
+.lightbox-close, .lightbox-nav{
+  position:absolute;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  color:var(--text);
+  width:44px;height:44px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background .25s, border-color .25s;
+}
+.lightbox-close:hover, .lightbox-nav:hover{background:rgba(255,255,255,.1);border-color:var(--aperture);}
+.lightbox-close{top:26px;right:26px;}
+.lightbox-nav.prev{left:26px;top:50%;transform:translateY(-50%);}
+.lightbox-nav.next{right:26px;top:50%;transform:translateY(-50%);}
+.lightbox-nav svg, .lightbox-close svg{width:18px;height:18px;}
+@media(max-width:700px){
+  .lightbox-nav{width:38px;height:38px;}
+  .lightbox-nav.prev{left:10px;}
+  .lightbox-nav.next{right:10px;}
+  .lightbox-close{top:14px;right:14px;}
+}
+
+/* =========================================================
+   8. CV
+========================================================= */
+.cv-panel{
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface);
+  padding:56px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:40px;
+  align-items:center;
+}
+.cv-panel h3{font-size:1.5rem;margin-bottom:10px;}
+.cv-panel p{color:var(--text-dim);max-width:480px;}
+.cv-meta{
+  margin-top:22px;
+  display:flex;gap:28px;flex-wrap:wrap;
+  font-family:var(--font-mono);
+  font-size:.76rem;
+  color:var(--text-faint);
+}
+.cv-meta strong{color:var(--text-dim);display:block;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
+@media(max-width:760px){.cv-panel{grid-template-columns:1fr;padding:40px 28px;}}
+
+/* =========================================================
+   9. CONTACT
+========================================================= */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border-soft);
+  border:1px solid var(--border-soft);
+}
+.contact-card{
+  background:var(--bg);
+  padding:30px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  transition:background .3s;
+}
+.contact-card:hover{background:var(--surface);}
+.contact-card svg{width:22px;height:22px;color:var(--signal);}
+.contact-card .label{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text-faint);
+}
+.contact-card .value{font-size:.98rem;color:var(--text);word-break:break-word;}
+.contact-card:hover .value{color:var(--signal);}
+@media(max-width:900px){.contact-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.contact-grid{grid-template-columns:1fr;}}
+
+/* =========================================================
+   10. FOOTER
+========================================================= */
+footer{
+  border-top:1px solid var(--border-soft);
+  padding:36px 0;
+}
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  font-family:var(--font-mono);
+  font-size:.74rem;
+  color:var(--text-faint);
+}
+.footer-inner a{color:var(--text-faint);transition:color .25s;}
+.footer-inner a:hover{color:var(--signal);}
+
+.to-top{
+  position:fixed;
+  bottom:28px; right:28px;
+  width:46px;height:46px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:all .3s var(--ease);
+  z-index:80;
+}
+.to-top.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.to-top:hover{border-color:var(--signal);}
+.to-top svg{width:16px;height:16px;color:var(--text);}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="#5b8def" stroke-width="1.2"/>
+        <circle cx="20" cy="20" r="3" fill="#5b8def"/>
+        <path d="M20 2v10M20 28v10M2 20h10M28 20h10M7 7l7 7M33 33l-7-7M33 7l-7 7M7 33l7-7" stroke="#e8a54b" stroke-width="1" opacity=".55"/>
+      </svg>
+      <span class="brand-name">F.A.<span> / portfolio</span></span>
+    </a>
+
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#photography">Photography</a>
+      <a href="#cv">CV</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-cta">
+      <!-- EDIT: replace with your GitHub username URL if different -->
+      <a href="https://github.com/fakhararrazi" target="_blank" rel="noopener" aria-label="GitHub profile">
+        <svg class="gh-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.15-.02-2.09-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-outline" style="padding:10px 18px;">Contact</a>
+      <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#research">Research</a>
+  <a href="#photography">Photography</a>
+  <a href="#cv">CV</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- side scroll dots -->
+<div class="side-nav" id="sideNav">
+  <button data-target="hero" aria-label="Hero"></button>
+  <button data-target="about" aria-label="About"></button>
+  <button data-target="skills" aria-label="Skills"></button>
+  <button data-target="projects" aria-label="Projects"></button>
+  <button data-target="research" aria-label="Research"></button>
+  <button data-target="photography" aria-label="Photography"></button>
+  <button data-target="cv" aria-label="CV"></button>
+  <button data-target="contact" aria-label="Contact"></button>
+</div>
+
+<!-- ============================================================ HERO -->
+<section class="hero" id="hero">
+  <a id="top"></a>
+  <div class="hero-inner">
+    <div class="hero-text reveal">
+      <div class="eyebrow">Portfolio — 2026</div>
+      <h1>Aidoudi El Fakhar<br><em>Arrazi</em></h1>
+      <div class="hero-role">
+        <span>Software Engineer</span><span class="dot">·</span>
+        <span>Network &amp; FANET Research</span><span class="dot">·</span>
+        <span>Photographer</span>
+      </div>
+      <p class="hero-intro">
+        I design and build software systems, and study how machines talk to
+        each other — currently researching Flying Ad-hoc Networks (FANET) with
+        NS-3. Off the terminal, I frame the same curiosity through a camera.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Work</a>
+        <!-- EDIT: point this at your actual CV file, e.g. assets/cv.pdf -->
+        <a href="assets/cv.pdf" class="btn btn-outline" download>Download CV</a>
+      </div>
+      <div class="hero-coords">LAT 36.19° N · LON 5.41° E · SETIF, DZ &mdash; NODE_STATUS: ONLINE</div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="150" stroke="#1a2130" stroke-width="1"/>
+        <g class="orbit-group">
+          <!-- spokes -->
+          <g stroke="#5b8def" stroke-width="1" opacity=".5">
+            <line x1="200" y1="200" x2="340" y2="200"/>
+            <line x1="200" y1="200" x2="299" y2="299"/>
+            <line x1="200" y1="200" x2="200" y2="340"/>
+            <line x1="200" y1="200" x2="101" y2="299"/>
+            <line x1="200" y1="200" x2="60" y2="200"/>
+            <line x1="200" y1="200" x2="101" y2="101"/>
+            <line x1="200" y1="200" x2="200" y2="60"/>
+            <line x1="200" y1="200" x2="299" y2="101"/>
+          </g>
+          <!-- ring mesh -->
+          <polygon points="340,200 299,299 200,340 101,299 60,200 101,101 200,60 299,101" fill="none" stroke="#e8a54b" stroke-width="1" opacity=".4"/>
+          <!-- pulse lines -->
+          <line class="pulse-line" x1="200" y1="200" x2="340" y2="200" stroke="#5b8def" stroke-width="1.6"/>
+          <line class="pulse-line" x1="200" y1="200" x2="200" y2="60" stroke="#e8a54b" stroke-width="1.6" style="animation-delay:1.2s"/>
+          <!-- nodes -->
+          <circle class="node-dot" cx="340" cy="200" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="299" cy="299" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="200" cy="340" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="101" cy="299" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="60" cy="200" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="101" cy="101" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="200" cy="60" r="5" fill="#5b8def"/>
+          <circle class="node-dot" cx="299" cy="101" r="5" fill="#5b8def"/>
+        </g>
+        <circle cx="200" cy="200" r="9" fill="#0a0d13" stroke="#e8a54b" stroke-width="1.5"/>
+        <circle cx="200" cy="200" r="3" fill="#e8a54b"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ============================================================ ABOUT -->
+<section class="section-pad" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">About</div>
+      <h2>Two ways of paying attention</h2>
+      <p>Engineering and photography are the same instinct pointed in different directions — noticing structure, then deciding what matters enough to keep.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="portrait-slot reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 15l-5-5-9 9"/></svg>
+        <div>ADD YOUR PORTRAIT<br>assets/portrait.jpg</div>
+      </div>
+
+      <div class="about-body reveal">
+        <p>
+          I'm <strong>Aidoudi El Fakhar Arrazi</strong>, a computer science
+          engineer working across software development and networked
+          systems. My current research focuses on <strong>Flying Ad-hoc
+          Networks (FANET)</strong>, using NS-3 to simulate routing protocols,
+          mobility models, and the trade-offs that show up when nodes are
+          fast, disconnected, and constantly moving.
+        </p>
+        <p>
+          Alongside research, I build software end-to-end — from small tools
+          like <strong>Playnck</strong> to longer-running experiments — and I
+          keep coming back to the same question in both my code and my
+          research: how do independent parts stay coordinated when nothing
+          holds still?
+        </p>
+        <p>
+          Photography is where that same attention slows down. No packets,
+          no protocols — just light, timing, and framing. It's the other half
+          of this site, and it's still growing.
+        </p>
+        <!-- EDIT: adjust the paragraphs above to match your real background,
+             education, and current focus. -->
+
+        <div class="focus-strip">
+          <div class="focus-item"><div class="k">Currently</div><div class="v">FANET / NS-3 Research</div></div>
+          <div class="focus-item"><div class="k">Also building</div><div class="v">Software &amp; tools</div></div>
+          <div class="focus-item"><div class="k">Off duty</div><div class="v">Behind a camera</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SKILLS -->
+<section class="section-pad" id="skills" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Skills</div>
+      <h2>Tools &amp; technologies</h2>
+      <p>What I reach for most — grouped by how I actually use them.</p>
+    </div>
+
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Languages</h3>
+        <div class="tag-list">
+          <span class="tag">C / C++</span><span class="tag">Python</span><span class="tag">Java</span>
+          <span class="tag">JavaScript</span><span class="tag">Bash</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v6M12 13l-5.5 4M12 13l5.5 4"/></svg>Networking &amp; Simulation</h3>
+        <div class="tag-list">
+          <span class="tag">NS-3</span><span class="tag">FANET</span><span class="tag">Routing Protocols</span>
+          <span class="tag">TCP/IP</span><span class="tag">Wireshark</span><span class="tag">Linux Networking</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M8 21h8M12 18v3"/></svg>Software &amp; Tools</h3>
+        <div class="tag-list">
+          <span class="tag">Git / GitHub</span><span class="tag">Linux</span><span class="tag">REST APIs</span>
+          <span class="tag">VS Code</span><span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M4 12a8 8 0 0 1 16 0"/></svg>Photography</h3>
+        <div class="tag-list">
+          <span class="tag">Composition</span><span class="tag">Lightroom</span>
+          <span class="tag">Color Grading</span><span class="tag">Manual Exposure</span>
+        </div>
+      </div>
+    </div>
+    <!-- EDIT: adjust tags in each category to match your real toolset. -->
+  </div>
+</section>
+
+<!-- ============================================================ PROJECTS -->
+<section class="section-pad" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Selected Work</div>
+      <h2>Featured software projects</h2>
+      <p>A mix of research tooling and standalone software.</p>
+    </div>
+
+    <div class="projects-grid reveal">
+      <article class="project-card tech">
+        <div class="glow"></div>
+        <div class="project-tag">Research · NS-3</div>
+        <h3>FANET Routing Simulation</h3>
+        <p>Simulation and performance analysis of routing protocols for
+        Flying Ad-hoc Networks in NS-3 — modelling drone mobility, dynamic
+        topology changes, and their effect on delivery ratio and latency.
+        See the full write-up in the Research section below.</p>
+        <div class="project-links">
+          <a href="#research">Read more
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <!-- EDIT: link to your real repo -->
+          <a href="https://github.com/fakhararrazi" target="_blank" rel="noopener">Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card tech">
+        <div class="glow"></div>
+        <div class="project-tag">Software</div>
+        <h3>Playnck</h3>
+        <p>A minimal, distraction-free music player — clean playback
+        controls, custom playlists, and an interface built to stay out of
+        the way of listening.</p>
+        <!-- EDIT: rewrite this description with the real stack / features
+             of your Playnck project. -->
+        <div class="project-links">
+          <!-- EDIT: replace # with your real repo / live demo links -->
+          <a href="#" target="_blank" rel="noopener">Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener">Live demo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <a class="project-card cta" href="https://github.com/fakhararrazi" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91.5S18.73.15 16 2a13.38 13.38 0 0 0-7 0C6.27.15 5.09.5 5.09.5A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <h3>More on GitHub</h3>
+        <p>Browse the rest of my repositories &amp; experiments</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ RESEARCH -->
+<section class="section-pad" id="research" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Research</div>
+      <h2>FANET &amp; NS-3</h2>
+      <p>A closer look at my primary research focus: routing and mobility in Flying Ad-hoc Networks.</p>
+    </div>
+
+    <div class="research-panel reveal">
+      <div class="research-copy">
+        <h3>Simulating resilient drone networks</h3>
+        <p>
+          Flying Ad-hoc Networks (FANETs) connect autonomous drones without
+          fixed infrastructure — nodes join, move fast, and disconnect
+          constantly. My work uses <strong style="color:var(--text)">NS-3</strong>
+          to simulate this environment and measure how different routing
+          strategies hold up under real mobility conditions.
+        </p>
+        <ul class="research-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+            Modelling drone mobility patterns and dynamic topology changes
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+            Comparing routing protocols on packet delivery ratio &amp; latency
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+            Analyzing network resilience under node loss &amp; high mobility
+          </li>
+        </ul>
+        <!-- EDIT: swap in your real methodology, findings, and paper/repo links. -->
+        <div class="hero-actions">
+          <!-- EDIT: link to the paper, repo, or report -->
+          <a href="https://github.com/fakhararrazi" target="_blank" rel="noopener" class="btn btn-primary">View Repository</a>
+        </div>
+      </div>
+      <div class="research-visual">
+        <svg viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#5b8def" stroke-width="1" opacity=".55">
+            <line x1="40" y1="60" x2="120" y2="30"/>
+            <line x1="120" y1="30" x2="210" y2="55"/>
+            <line x1="210" y1="55" x2="280" y2="40"/>
+            <line x1="40" y1="60" x2="90" y2="140"/>
+            <line x1="120" y1="30" x2="90" y2="140"/>
+            <line x1="90" y1="140" x2="170" y2="120"/>
+            <line x1="210" y1="55" x2="170" y2="120"/>
+            <line x1="170" y1="120" x2="260" y2="150"/>
+            <line x1="280" y1="40" x2="260" y2="150"/>
+            <line x1="90" y1="140" x2="60" y2="220"/>
+            <line x1="170" y1="120" x2="150" y2="215"/>
+            <line x1="260" y1="150" x2="240" y2="200"/>
+          </g>
+          <g fill="#e8a54b">
+            <circle cx="40" cy="60" r="4"/><circle cx="120" cy="30" r="4"/>
+            <circle cx="210" cy="55" r="4"/><circle cx="280" cy="40" r="4"/>
+            <circle cx="90" cy="140" r="4"/><circle cx="170" cy="120" r="4"/>
+            <circle cx="260" cy="150" r="4"/><circle cx="60" cy="220" r="4"/>
+            <circle cx="150" cy="215" r="4"/><circle cx="240" cy="200" r="4"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PHOTOGRAPHY -->
+<section class="section-pad" id="photography">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow amber">Photography</div>
+      <h2>Through the viewfinder</h2>
+      <p>A growing collection — street, landscape and portrait work. New frames added regularly.</p>
+    </div>
+
+    <div class="gallery-controls reveal" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="street">Street</button>
+      <button class="filter-btn" data-filter="landscape">Landscape</button>
+      <button class="filter-btn" data-filter="portrait">Portrait</button>
+    </div>
+
+    <div class="gallery reveal" id="gallery"><!-- populated by JS --></div>
+  </div>
+</section>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-cap" id="lightboxCap"></div>
+  </div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="lightbox-nav next" id="lightboxNext" aria-label="Next">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+</div>
+
+<!-- ============================================================ CV -->
+<section class="section-pad" id="cv" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">CV</div>
+      <h2>Curriculum vitae</h2>
+    </div>
+
+    <div class="cv-panel reveal">
+      <div>
+        <h3>Full résumé, one download away</h3>
+        <p>Education, research, projects, and technical skills — the full
+        picture in one PDF.</p>
+        <div class="cv-meta">
+          <div><strong>Focus</strong>Networks &amp; Software Engineering</div>
+          <div><strong>Research</strong>FANET / NS-3</div>
+          <div><strong>Based in</strong>Sétif, Algeria</div>
+        </div>
+        <!-- EDIT: update cv-meta values as needed -->
+      </div>
+      <!-- EDIT: point this at your actual CV file -->
+      <a href="assets/cv.pdf" download class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+        Download CV
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT -->
+<section class="section-pad" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Contact</div>
+      <h2>Let's talk</h2>
+      <p>Open to research collaborations, software projects, and photography work.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <!-- EDIT: replace all placeholder links/handles below -->
+      <a class="contact-card" href="mailto:your.email@example.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <div class="label">Email</div>
+        <div class="value">your.email@example.com</div>
+      </a>
+      <a class="contact-card" href="https://github.com/fakhararrazi" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91.5S18.73.15 16 2a13.38 13.38 0 0 0-7 0C6.27.15 5.09.5 5.09.5A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <div class="label">GitHub</div>
+        <div class="value">github.com/fakhararrazi</div>
+      </a>
+      <a class="contact-card" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg>
+        <div class="label">LinkedIn</div>
+        <div class="value">Add your profile URL</div>
+      </a>
+      <a class="contact-card" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        <div class="label">Instagram</div>
+        <div class="value">Add your photography handle</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER -->
+<footer>
+  <div class="wrap footer-inner">
+    <span>&copy; <span id="year"></span> Aidoudi El Fakhar Arrazi. Built with HTML, CSS &amp; JavaScript.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+const burger = document.getElementById('burger');
+const mobilePanel = document.getElementById('mobilePanel');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobilePanel.classList.toggle('open');
+});
+mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  mobilePanel.classList.remove('open');
+}));
+
+/* =========================================================
+   SCROLLSPY (top nav + side dots)
+========================================================= */
+const sections = ['hero','about','skills','projects','research','photography','cv','contact']
+  .map(id => document.getElementById(id)).filter(Boolean);
+const topLinks = document.querySelectorAll('nav.links a');
+const sideButtons = document.querySelectorAll('.side-nav button');
+
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      topLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      sideButtons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+    }
+  });
+}, { rootMargin: '-45% 0px -45% 0px' });
+sections.forEach(s => spy.observe(s));
+
+sideButtons.forEach(btn => btn.addEventListener('click', () => {
+  document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+}));
+
+/* =========================================================
+   REVEAL ON SCROLL
+========================================================= */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+  toTop.classList.toggle('show', window.scrollY > 700);
+}, { passive: true });
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* =========================================================
+   FOOTER YEAR
+========================================================= */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* =========================================================
+   PHOTO GALLERY DATA
+   ---------------------------------------------------------
+   Add your own photos here. Each entry needs:
+     src      -> path to the image (e.g. "assets/photos/street-01.jpg")
+     category -> "street" | "landscape" | "portrait"
+     caption  -> short text shown on hover + in the lightbox
+
+   Leave src empty ("") to keep a placeholder tile until you have
+   an image ready — it will show which category is missing.
+========================================================= */
+const photos = [
+  { src: "", category: "street",    caption: "" },
+  { src: "", category: "landscape", caption: "" },
+  { src: "", category: "portrait",  caption: "" },
+  { src: "", category: "street",    caption: "" },
+  { src: "", category: "landscape", caption: "" },
+  { src: "", category: "street",    caption: "" },
+  { src: "", category: "portrait",  caption: "" },
+  { src: "", category: "landscape", caption: "" },
+];
+
+const galleryEl = document.getElementById('gallery');
+const placeholderSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 15l-5-5-9 9"/></svg>`;
+
+function renderGallery(filter = 'all') {
+  galleryEl.innerHTML = '';
+  photos
+    .filter(p => filter === 'all' || p.category === filter)
+    .forEach((p, i) => {
+      const item = document.createElement('div');
+      if (p.src) {
+        item.className = 'gallery-item';
+        item.innerHTML = `<img src="${p.src}" alt="${p.caption || 'Photograph'}" loading="lazy">
+          <div class="gallery-cap">${p.caption || ''}</div>`;
+        item.addEventListener('click', () => openLightbox(p));
+      } else {
+        item.className = 'gallery-item placeholder';
+        item.innerHTML = `${placeholderSVG}<div class="ph-cat">${p.category}</div><div>Add an image path<br>in the \`photos\` array</div>`;
+      }
+      galleryEl.appendChild(item);
+    });
+}
+renderGallery();
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery(btn.dataset.filter);
+  });
+});
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCap = document.getElementById('lightboxCap');
+let activeList = [];
+let activeIndex = 0;
+
+function openLightbox(photo) {
+  activeList = photos.filter(p => p.src);
+  activeIndex = activeList.indexOf(photo);
+  showLightboxImage();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLightboxImage() {
+  const p = activeList[activeIndex];
+  if (!p) return;
+  lightboxImg.src = p.src;
+  lightboxImg.alt = p.caption || '';
+  lightboxCap.textContent = p.caption || '';
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function nextImage(dir) {
+  if (!activeList.length) return;
+  activeIndex = (activeIndex + dir + activeList.length) % activeList.length;
+  showLightboxImage();
+}
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', () => nextImage(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => nextImage(1));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') nextImage(1);
+  if (e.key === 'ArrowLeft') nextImage(-1);
+});
+</script>
+</body>
+</html>
