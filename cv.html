@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Aidoudi El Fakhar Arrazi</title>
+  <meta name="description" content="CV of Aidoudi El Fakhar Arrazi — education, experience, skills and projects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cv.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="nav__mark" href="index.html"><strong>A.</strong> Arrazi</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cv.html" aria-current="page">CV</a></li>
+        <li><a class="nav__contact" href="about.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="cv-head container">
+      <div data-reveal>
+        <p class="label">Curriculum Vitae</p>
+        <h1 style="margin-top: 1rem;">Aidoudi El Fakhar Arrazi.</h1>
+      </div>
+      <a class="btn" href="assets/cv/cv.pdf" download data-reveal>
+        Download CV
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
+      </a>
+    </section>
+
+    <p class="placeholder-note container" style="display:block; margin-bottom: 2rem;" data-reveal>
+      Placeholder — the download button expects a file at <span class="mono">assets/cv/cv.pdf</span>. Add your CV as a PDF at that path and the button will work as-is.
+    </p>
+
+    <section class="cv-sheet container">
+
+      <div class="cv-section" data-reveal>
+        <h2>Summary</h2>
+        <div>
+          <p style="color: var(--ink-soft); max-width: 56ch;">
+            Computer Science background with a focus on Networks &amp; Distributed
+            Systems, combining software development with research into networked and
+            simulated systems. Photography practiced alongside the technical work as
+            a parallel, equally serious discipline.
+          </p>
+        </div>
+      </div>
+
+      <div class="cv-section" data-reveal>
+        <h2>Education</h2>
+        <div>
+          <p class="placeholder-note">Placeholder — add institution, program, and dates.</p>
+        </div>
+      </div>
+
+      <div class="cv-section" data-reveal>
+        <h2>Experience</h2>
+        <div>
+          <div class="cv-entry">
+            <div class="cv-entry__row">
+              <span class="cv-entry__title">El Fadjer</span>
+              <span class="cv-entry__meta">6 months</span>
+            </div>
+            <p class="cv-entry__desc placeholder-note">Placeholder — add role title and description.</p>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry__row">
+              <span class="cv-entry__title">SARL Screen Star</span>
+              <span class="cv-entry__meta">1 month</span>
+            </div>
+            <p class="cv-entry__desc placeholder-note">Placeholder — add role title and description.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-section" data-reveal>
+        <h2>Skills</h2>
+        <div>
+          <div class="skills-grid">
+            <span>Software Development</span>
+            <span>Networks &amp; Distributed Systems</span>
+            <span>NS-3 Simulation</span>
+            <span>FANET</span>
+          </div>
+          <p class="placeholder-note" style="margin-top: 1rem;">Placeholder — add specific languages, frameworks and tools once confirmed.</p>
+        </div>
+      </div>
+
+      <div class="cv-section" data-reveal>
+        <h2>Projects</h2>
+        <div>
+          <div class="cv-entry">
+            <div class="cv-entry__row">
+              <span class="cv-entry__title">Playnck</span>
+              <span class="cv-entry__meta mono">github.com/FakharArrazi</span>
+            </div>
+            <p class="cv-entry__desc">A music player application.</p>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry__row">
+              <span class="cv-entry__title">FANET / NS-3</span>
+              <span class="cv-entry__meta mono">github.com/FakharArrazi</span>
+            </div>
+            <p class="cv-entry__desc">Networking research and simulation project on Flying Ad-hoc Networks using NS-3.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-section" data-reveal>
+        <h2>Languages</h2>
+        <div>
+          <p class="placeholder-note">Placeholder — add spoken/written languages and proficiency.</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer container">
+    <div class="footer__grid">
+      <span class="footer__name display">Aidoudi El Fakhar Arrazi</span>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="https://github.com/FakharArrazi" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="footer__meta">
+      <span>&copy; <span id="year"></span> Aidoudi El Fakhar Arrazi</span>
+      <span>Built &amp; maintained independently</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="js/main.js"></script>
+</body>
+</html>

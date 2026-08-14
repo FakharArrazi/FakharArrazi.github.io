@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Aidoudi El Fakhar Arrazi</title>
+  <meta name="description" content="Software and networking projects, and a photography portfolio, by Aidoudi El Fakhar Arrazi." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/portfolio.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="nav__mark" href="index.html"><strong>A.</strong> Arrazi</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html" aria-current="page">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a class="nav__contact" href="about.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head container">
+      <p class="label" data-reveal>Portfolio</p>
+      <h1 data-reveal>Technology &amp; photography.</h1>
+    </section>
+
+    <nav class="world-nav container" aria-label="Portfolio sections">
+      <a href="#technology">Technology</a>
+      <a href="#photography">Photography</a>
+    </nav>
+
+    <!-- ================= TECHNOLOGY ================= -->
+    <section id="technology" class="section container">
+      <p class="label" data-reveal>01 — Technology</p>
+
+      <article class="project" data-reveal>
+        <div class="project__media">
+          <div class="media-placeholder">
+            <span class="media-placeholder__label">assets/images/projects/playnck.jpg</span>
+          </div>
+        </div>
+        <div class="project__body">
+          <span class="project__index mono">01</span>
+          <h3 class="project__title">Playnck</h3>
+          <p class="project__desc">A music player application, built with attention to interface detail — from playback controls to the small interactions around a listening session.</p>
+          <div class="project__meta">
+            <span>Music player</span>
+            <span>Software</span>
+          </div>
+          <div class="project__link">
+            <a class="link-arrow" href="https://github.com/FakharArrazi/Project-Playnck" target="_blank" rel="noopener">
+              View on GitHub
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" data-reveal>
+        <div class="project__media">
+          <div class="media-placeholder">
+            <span class="media-placeholder__label">assets/images/projects/fanet-ns3.jpg</span>
+          </div>
+        </div>
+        <div class="project__body">
+          <span class="project__index mono">02</span>
+          <h3 class="project__title">FANET / NS-3</h3>
+          <p class="project__desc">A networking research and simulation project centered on Flying Ad-hoc Networks (FANET), built using the NS-3 network simulator to study how mobile aerial nodes communicate and coordinate.</p>
+          <div class="project__meta">
+            <span>Networking research</span>
+            <span>NS-3 simulation</span>
+            <span>FANET</span>
+          </div>
+          <div class="project__link">
+            <a class="link-arrow" href="https://github.com/FakharArrazi" target="_blank" rel="noopener">
+              View on GitHub
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= PHOTOGRAPHY ================= -->
+    <section id="photography" class="container">
+      <div class="photo-head" data-reveal>
+        <div>
+          <p class="label">02 — Photography</p>
+          <h2 style="margin-top: 0.75rem;">A visual practice, held to the same standard as the code.</h2>
+        </div>
+        <div class="filter-bar" data-filter-bar role="group" aria-label="Filter photographs by category">
+          <button class="filter-btn" data-category="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-category="street" aria-pressed="false">Street</button>
+          <button class="filter-btn" data-category="landscape" aria-pressed="false">Landscape</button>
+          <button class="filter-btn" data-category="portrait" aria-pressed="false">Portrait</button>
+        </div>
+      </div>
+
+      <div class="gallery" data-gallery aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer container">
+    <div class="footer__grid">
+      <span class="footer__name display">Aidoudi El Fakhar Arrazi</span>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="https://github.com/FakharArrazi" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="footer__meta">
+      <span>&copy; <span id="year"></span> Aidoudi El Fakhar Arrazi</span>
+      <span>Built &amp; maintained independently</span>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
+    <button class="lightbox__prev" data-lightbox-prev aria-label="Previous photograph">&larr; Prev</button>
+    <figure class="lightbox__figure">
+      <div class="lightbox__media" data-lightbox-img></div>
+      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+    </figure>
+    <button class="lightbox__next" data-lightbox-next aria-label="Next photograph">Next &rarr;</button>
+    <button class="lightbox__close" data-lightbox-close aria-label="Close viewer">Close &#10005;</button>
+  </div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="js/main.js"></script>
+  <script src="js/portfolio.js"></script>
+</body>
+</html>
