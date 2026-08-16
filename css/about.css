@@ -1,7 +1,7 @@
 /* About page — about.html */
 
 .about-intro {
-  padding-block: clamp(3rem, 7vw, 5rem) clamp(2rem, 5vw, 3rem);
+  padding-block: clamp(3.5rem, 8vw, 6rem) clamp(2rem, 5vw, 3rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(2rem, 6vw, 5rem);
@@ -14,24 +14,32 @@
   grid-template-columns: minmax(10rem, 0.5fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 5vw, 4rem);
   padding-block: clamp(2.5rem, 6vw, 4rem);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-soft);
 }
 @media (max-width: 720px) { .about-block { grid-template-columns: 1fr; gap: 0.75rem; } }
 
-.about-block h2 { font-size: var(--step-1); }
-.about-block .body { max-width: 56ch; color: var(--ink-soft); }
+.about-block__label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.about-block h2 { font-size: var(--step-1); font-weight: 600; letter-spacing: -0.01em; }
+.about-block .body { max-width: 58ch; color: var(--ink-soft); line-height: 1.6; }
 .about-block .body p + p { margin-top: 1rem; }
 
 .timeline-row {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
-  padding-block: 1.1rem;
+  padding-block: 1.15rem;
   border-bottom: 1px solid var(--line-soft);
   flex-wrap: wrap;
 }
 .timeline-row:first-child { border-top: 1px solid var(--line-soft); }
-.timeline-row__org { font-family: var(--font-display); font-size: var(--step-1); }
+.timeline-row__org { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); letter-spacing: -0.01em; }
 .timeline-row__meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); text-align: right; }
 
 .tag-grid {
@@ -42,15 +50,8 @@
 .tag-grid span {
   font-family: var(--font-mono);
   font-size: var(--step--1);
-  border: 1px solid var(--line);
-  padding: 0.4em 0.8em;
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  padding: 0.45em 0.85em;
   color: var(--ink-soft);
-}
-
-.placeholder-note {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  color: var(--muted);
-  border-left: 2px solid var(--line);
-  padding-left: 1rem;
 }

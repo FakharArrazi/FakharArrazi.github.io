@@ -76,4 +76,30 @@
       revealEls.forEach(function (el) { el.classList.add("is-visible"); });
     }
   }
+
+  /* ---------- Auto-detecting media placeholders ----------
+     Every .media-placeholder that carries a data-src quietly checks
+     whether that file actually exists. If it loads, the placeholder
+     swaps itself for the real image automatically — no HTML edit
+     required. Drop a file at the path named in data-src, refresh, and
+     it appears. If the file isn't there (yet), the placeholder just
+     stays exactly as it was, so nothing ever shows broken. This is why
+     adding an image should never again need a follow-up code change:
+     every placeholder on the site now self-updates the same way. */
+  document.querySelectorAll(".media-placeholder[data-src]").forEach(function (el) {
+    var src = el.getAttribute("data-src");
+    var alt = el.getAttribute("data-alt") || "";
+    var probe = new Image();
+    probe.onload = function () {
+      var img = document.createElement("img");
+      img.src = src;
+      img.alt = alt;
+      img.loading = el.hasAttribute("data-eager") ? "eager" : "lazy";
+      el.innerHTML = "";
+      el.appendChild(img);
+      requestAnimationFrame(function () { el.classList.add("has-image"); });
+    };
+    probe.onerror = function () { /* leave the placeholder as-is */ };
+    probe.src = src;
+  });
 })();

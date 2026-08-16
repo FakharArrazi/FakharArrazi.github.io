@@ -203,14 +203,15 @@ p.lede { font-size: var(--step-1); color: var(--ink-soft); line-height: 1.6; max
 }
 
 .nav__mark {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  letter-spacing: 0.01em;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 500;
+  letter-spacing: -0.015em;
   color: var(--ink);
   transition: opacity var(--fast) var(--ease);
 }
 .nav__mark:hover { opacity: 0.6; }
-.nav__mark strong { font-weight: 600; }
+.nav__mark strong { font-weight: 700; }
 
 .nav__links {
   display: flex;
@@ -358,14 +359,17 @@ p.lede { font-size: var(--step-1); color: var(--ink-soft); line-height: 1.6; max
   padding: 1.1rem 1.25rem;
   width: 100%;
 }
+.media-placeholder.has-image::before { opacity: 0; }
 .media-placeholder img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--slow) var(--ease);
+  transition: transform var(--slow) var(--ease), opacity var(--med) var(--ease);
+  opacity: 0;
 }
+.media-placeholder.has-image img { opacity: 1; }
 
 /* ---------- Gallery tile (shared across pages) ----------
    A single media tile used both by the full photography gallery

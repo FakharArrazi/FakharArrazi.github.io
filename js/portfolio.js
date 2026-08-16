@@ -38,6 +38,7 @@ var PHOTOS = [
   var lightbox = document.querySelector("[data-lightbox]");
   var lbImg = lightbox.querySelector("[data-lightbox-img]");
   var lbCaption = lightbox.querySelector("[data-lightbox-caption]");
+  var lbCounter = lightbox.querySelector("[data-lightbox-counter]");
   var currentFilter = "all";
   var currentIndex = 0;
   var lastFocused = null;
@@ -148,6 +149,12 @@ var PHOTOS = [
       lbImg.appendChild(ph);
     }
     lbCaption.textContent = photo.caption + "  —  " + photo.ref;
+
+    if (lbCounter) {
+      var indices = visibleIndices();
+      var pos = indices.indexOf(index);
+      lbCounter.textContent = (pos + 1) + " / " + indices.length;
+    }
   }
 
   function openLightbox(index) {
