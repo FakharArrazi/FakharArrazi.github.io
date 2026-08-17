@@ -1,0 +1,139 @@
+/* Portfolio page — portfolio.html */
+
+.page-head { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 2.5rem); }
+.page-head h1 { max-width: 18ch; margin-top: 0.75rem; }
+
+/* ---------- Quick nav between projects ---------- */
+
+.world-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+.world-nav a {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.2em;
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.world-nav a:hover, .world-nav a:focus-visible { color: var(--ink); border-color: var(--ink); }
+
+/* ---------- Project block ---------- */
+
+.project-block { padding-block: clamp(3rem, 7vw, 5.5rem); }
+
+.project-block__gallery {
+  max-width: 760px;
+  margin-inline: auto;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.project-block__body {
+  max-width: 46em;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.project-block__meta {
+  font-size: var(--step--1);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.project-block__desc {
+  color: var(--ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  max-width: 42em;
+  margin-top: 1rem;
+}
+
+.project-block__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+/* ---------- Carousel ---------- */
+
+.carousel { position: relative; }
+
+.carousel__viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.carousel__viewport:active { cursor: grabbing; }
+
+.carousel__track {
+  display: flex;
+  transition: transform var(--slow) var(--ease);
+  will-change: transform;
+}
+.carousel__track.is-dragging { transition: none; }
+
+.carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  aspect-ratio: var(--ph-ratio, 8 / 5);
+  position: relative;
+}
+.carousel__slide .media-placeholder { border: 0; height: 100%; }
+.carousel__slide .media-placeholder img { object-fit: contain; }
+
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  z-index: 2;
+  transition: border-color var(--fast) var(--ease), opacity var(--fast) var(--ease);
+}
+.carousel__btn:hover, .carousel__btn:focus-visible { border-color: var(--ink); }
+.carousel__btn svg { width: 1rem; height: 1rem; }
+.carousel__btn--prev { left: 0.75rem; }
+.carousel__btn--next { right: 0.75rem; }
+.carousel__btn[disabled] { opacity: 0.2; pointer-events: none; }
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+.carousel__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.carousel__dot.is-active { background: var(--ink); transform: scale(1.35); }
+
+/* Single-slide carousels don't need controls */
+.carousel[data-single] .carousel__btn,
+.carousel[data-single] .carousel__dots { display: none; }
+
+@media (max-width: 640px) {
+  .carousel__btn { width: 2rem; height: 2rem; }
+}

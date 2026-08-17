@@ -323,6 +323,7 @@ p.lede { font-size: var(--step-1); color: var(--ink-soft); line-height: 1.55; ma
 }
 /* Once a real file loads at the given path, main.js adds this class
    so the photo shows and the placeholder path label disappears. */
+.media-placeholder.has-image { background: var(--bg-raised); }
 .media-placeholder.has-image img { display: block; }
 .media-placeholder.has-image .media-placeholder__label { display: none; }
 

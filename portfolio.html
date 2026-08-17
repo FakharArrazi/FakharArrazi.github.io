@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio — Aidoudi El Fakhar Arrazi</title>
-  <meta name="description" content="Software and networking projects, and a photography portfolio, by Aidoudi El Fakhar Arrazi." />
+  <meta name="description" content="Software and networking projects, photography, and design work by Aidoudi El Fakhar Arrazi." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,84 +36,220 @@
 
     <section class="page-head container">
       <p class="label" data-reveal>Portfolio</p>
-      <h1 data-reveal>Technology &amp; photography.</h1>
+      <h1 data-reveal>Selected work.</h1>
     </section>
 
     <nav class="world-nav container" aria-label="Portfolio sections">
-      <a href="#technology">Technology</a>
+      <a href="#playnck">Playnck</a>
+      <a href="#fanet">FANET / NS-3</a>
       <a href="#photography">Photography</a>
+      <a href="#design">Design</a>
     </nav>
 
-    <!-- ================= TECHNOLOGY ================= -->
-    <section id="technology" class="section container">
-      <p class="label" data-reveal>01 — Technology</p>
+    <hr class="hairline container" />
 
-      <article class="project" data-reveal>
-        <div class="project__media">
-          <div class="media-placeholder">
-            <img src="assets/images/projects/playnck.jpg" alt="Playnck music player screenshot">
-            <span class="media-placeholder__label">assets/images/projects/playnck.jpg</span>
+    <!-- ================= PLAYNCK ================= -->
+    <section id="playnck" class="project-block container" data-reveal>
+      <div class="project-block__gallery">
+        <div class="carousel" data-carousel>
+          <div class="carousel__viewport" data-carousel-viewport tabindex="0" role="group" aria-roledescription="carousel" aria-label="Playnck screenshots">
+            <div class="carousel__track" data-carousel-track style="--ph-ratio: 8/5;">
+              <div class="carousel__slide" style="--ph-ratio: 8/5;">
+                <div class="media-placeholder" style="--ph-ratio: 8/5;">
+                  <img src="assets/playnck/screenshot-01.jpg" alt="Playnck library view showing tracklist and now-playing panel">
+                  <span class="media-placeholder__label">assets/playnck/screenshot-01.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 8/5;">
+                <div class="media-placeholder" style="--ph-ratio: 8/5;">
+                  <img data-src="assets/playnck/screenshot-02.jpg" alt="Playnck playlist management screen">
+                  <span class="media-placeholder__label">assets/playnck/screenshot-02.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 8/5;">
+                <div class="media-placeholder" style="--ph-ratio: 8/5;">
+                  <img data-src="assets/playnck/screenshot-03.jpg" alt="Playnck metadata and album artwork detail view">
+                  <span class="media-placeholder__label">assets/playnck/screenshot-03.jpg</span>
+                </div>
+              </div>
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel-prev aria-label="Previous screenshot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel-next aria-label="Next screenshot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
           </div>
-        </div>
-        <div class="project__body">
-          <span class="project__index mono">01</span>
-          <h3 class="project__title">Playnck</h3>
-          <p class="project__desc">A music player application, built with attention to interface detail — from playback controls to the small interactions around a listening session.</p>
-          <div class="project__meta">
-            <span>Music player</span>
-            <span>Software</span>
-          </div>
-          <div class="project__link">
-            <a class="link-arrow" href="https://github.com/FakharArrazi/Project-Playnck" target="_blank" rel="noopener">
-              View on GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project" data-reveal>
-        <div class="project__media">
-          <div class="media-placeholder">
-            <img src="assets/images/projects/fanet-ns3.jpg" alt="FANET / NS-3 simulation screenshot">
-            <span class="media-placeholder__label">assets/images/projects/fanet-ns3.jpg</span>
-          </div>
-        </div>
-        <div class="project__body">
-          <span class="project__index mono">02</span>
-          <h3 class="project__title">FANET / NS-3</h3>
-          <p class="project__desc">A networking research and simulation project centered on Flying Ad-hoc Networks (FANET), built using the NS-3 network simulator to study how mobile aerial nodes communicate and coordinate.</p>
-          <div class="project__meta">
-            <span>Networking research</span>
-            <span>NS-3 simulation</span>
-            <span>FANET</span>
-          </div>
-          <div class="project__link">
-            <a class="link-arrow" href="https://github.com/FakharArrazi" target="_blank" rel="noopener">
-              View on GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <!-- ================= PHOTOGRAPHY ================= -->
-    <section id="photography" class="container">
-      <div class="photo-head" data-reveal>
-        <div>
-          <p class="label">02 — Photography</p>
-          <h2 style="margin-top: 0.75rem;">A visual practice, held to the same standard as the code.</h2>
-        </div>
-        <div class="filter-bar" data-filter-bar role="group" aria-label="Filter photographs by category">
-          <button class="filter-btn" data-category="all" aria-pressed="true">All</button>
-          <button class="filter-btn" data-category="street" aria-pressed="false">Street</button>
-          <button class="filter-btn" data-category="landscape" aria-pressed="false">Landscape</button>
-          <button class="filter-btn" data-category="portrait" aria-pressed="false">Portrait</button>
+          <div class="carousel__dots" data-carousel-dots></div>
         </div>
       </div>
 
-      <div class="gallery" data-gallery aria-live="polite"></div>
+      <div class="project-block__body">
+        <h2>Playnck</h2>
+        <p class="project-block__meta mono">Desktop music player · Electron</p>
+        <p class="project-block__desc">
+          Playnck is a desktop music player built with Electron, designed around a clean interface
+          and a focused listening experience. It supports local music libraries, playlists,
+          metadata and album artwork, with features such as automatic tagging, audio conversion,
+          playback controls and a responsive interface.
+        </p>
+        <div class="project-block__actions">
+          <a class="btn" href="https://github.com/FakharArrazi/Project-Playnck/releases/latest" target="_blank" rel="noopener">Download latest version</a>
+          <a class="link-arrow" href="https://github.com/FakharArrazi/Project-Playnck" target="_blank" rel="noopener">
+            View on GitHub
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hairline container" />
+
+    <!-- ================= FANET / NS-3 ================= -->
+    <section id="fanet" class="project-block container" data-reveal>
+      <div class="project-block__gallery">
+        <div class="carousel" data-carousel>
+          <div class="carousel__viewport" data-carousel-viewport tabindex="0" role="group" aria-roledescription="carousel" aria-label="FANET / NS-3 simulation images">
+            <div class="carousel__track" data-carousel-track style="--ph-ratio: 1/1;">
+              <div class="carousel__slide" style="--ph-ratio: 1/1;">
+                <div class="media-placeholder" style="--ph-ratio: 1/1;">
+                  <img src="assets/fanet/image-01.jpg" alt="Diagram of the FANET simulation topology: UAVs, ground users and base station links">
+                  <span class="media-placeholder__label">assets/fanet/image-01.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 1/1;">
+                <div class="media-placeholder" style="--ph-ratio: 1/1;">
+                  <img data-src="assets/fanet/image-02.jpg" alt="FANET / NS-3 simulation results">
+                  <span class="media-placeholder__label">assets/fanet/image-02.jpg</span>
+                </div>
+              </div>
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel-prev aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel-next aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="carousel__dots" data-carousel-dots></div>
+        </div>
+      </div>
+
+      <div class="project-block__body">
+        <h2>FANET / NS-3 Simulation</h2>
+        <p class="project-block__meta mono">Networking research · NS-3</p>
+        <p class="project-block__desc">
+          A networking research project focused on Flying Ad-hoc Networks (FANET), using NS-3 to
+          simulate UAV communication, mobility and routing scenarios. The project explores how
+          mobile nodes communicate and coordinate in dynamic network environments.
+        </p>
+        <div class="project-block__actions">
+          <a class="link-arrow" href="https://github.com/FakharArrazi" target="_blank" rel="noopener">
+            View on GitHub
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hairline container" />
+
+    <!-- ================= PHOTOGRAPHY ================= -->
+    <section id="photography" class="project-block container" data-reveal>
+      <div class="project-block__gallery">
+        <div class="carousel" data-carousel>
+          <div class="carousel__viewport" data-carousel-viewport tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photography">
+            <div class="carousel__track" data-carousel-track style="--ph-ratio: 3/2;">
+              <div class="carousel__slide" style="--ph-ratio: 3/2;">
+                <div class="media-placeholder" style="--ph-ratio: 3/2;">
+                  <img src="assets/photography/photo-01.jpg" alt="Photograph 1">
+                  <span class="media-placeholder__label">assets/photography/photo-01.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 3/2;">
+                <div class="media-placeholder" style="--ph-ratio: 3/2;">
+                  <img data-src="assets/photography/photo-02.jpg" alt="Photograph 2">
+                  <span class="media-placeholder__label">assets/photography/photo-02.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 3/2;">
+                <div class="media-placeholder" style="--ph-ratio: 3/2;">
+                  <img data-src="assets/photography/photo-03.jpg" alt="Photograph 3">
+                  <span class="media-placeholder__label">assets/photography/photo-03.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 3/2;">
+                <div class="media-placeholder" style="--ph-ratio: 3/2;">
+                  <img data-src="assets/photography/photo-04.jpg" alt="Photograph 4">
+                  <span class="media-placeholder__label">assets/photography/photo-04.jpg</span>
+                </div>
+              </div>
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel-prev aria-label="Previous photograph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel-next aria-label="Next photograph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="carousel__dots" data-carousel-dots></div>
+        </div>
+      </div>
+
+      <div class="project-block__body">
+        <h2>Photography</h2>
+        <p class="project-block__desc">
+          An ongoing visual practice across street, landscape and portrait work — composition
+          treated as its own discipline, held to the same standard as the code above.
+        </p>
+      </div>
+    </section>
+
+    <hr class="hairline container" />
+
+    <!-- ================= DESIGN ================= -->
+    <section id="design" class="project-block container" data-reveal>
+      <div class="project-block__gallery">
+        <div class="carousel" data-carousel>
+          <div class="carousel__viewport" data-carousel-viewport tabindex="0" role="group" aria-roledescription="carousel" aria-label="Design work">
+            <div class="carousel__track" data-carousel-track style="--ph-ratio: 4/3;">
+              <div class="carousel__slide" style="--ph-ratio: 4/3;">
+                <div class="media-placeholder" style="--ph-ratio: 4/3;">
+                  <img src="assets/design/design-01.jpg" alt="Design work 1">
+                  <span class="media-placeholder__label">assets/design/design-01.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 4/3;">
+                <div class="media-placeholder" style="--ph-ratio: 4/3;">
+                  <img data-src="assets/design/design-02.jpg" alt="Design work 2">
+                  <span class="media-placeholder__label">assets/design/design-02.jpg</span>
+                </div>
+              </div>
+              <div class="carousel__slide" style="--ph-ratio: 4/3;">
+                <div class="media-placeholder" style="--ph-ratio: 4/3;">
+                  <img data-src="assets/design/design-03.jpg" alt="Design work 3">
+                  <span class="media-placeholder__label">assets/design/design-03.jpg</span>
+                </div>
+              </div>
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel-prev aria-label="Previous design piece">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel-next aria-label="Next design piece">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="carousel__dots" data-carousel-dots></div>
+        </div>
+      </div>
+
+      <div class="project-block__body">
+        <h2>Design</h2>
+        <p class="project-block__desc">
+          Visual and graphic work created with tools such as Photoshop and Illustrator, exploring
+          composition, typography, image manipulation and visual direction.
+        </p>
+      </div>
     </section>
 
   </main>
@@ -134,17 +270,6 @@
       <span>Built &amp; maintained independently</span>
     </div>
   </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
-    <button class="lightbox__prev" data-lightbox-prev aria-label="Previous photograph">&larr; Prev</button>
-    <figure class="lightbox__figure">
-      <div class="lightbox__media" data-lightbox-img></div>
-      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
-    </figure>
-    <button class="lightbox__next" data-lightbox-next aria-label="Next photograph">Next &rarr;</button>
-    <button class="lightbox__close" data-lightbox-close aria-label="Close viewer">Close &#10005;</button>
-  </div>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   <script src="js/main.js"></script>
