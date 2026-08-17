@@ -1,7 +1,6 @@
 /* main.js — shared behavior across every page:
-   mobile navigation toggle, an intelligent sticky header (hides on
-   scroll-down, reappears on scroll-up), and a lightweight scroll-reveal
-   for [data-reveal] elements. */
+   mobile navigation toggle, sticky header shadow on scroll,
+   and a lightweight scroll-reveal for [data-reveal] elements. */
 
 (function () {
   "use strict";
@@ -26,35 +25,33 @@
     });
   }
 
-  /* ---------- Intelligent sticky header ----------
-     Adds a hairline + shadow once scrolled, and slides the header out
-     of view while scrolling down (past its own height) then brings it
-     back the moment the person scrolls up — same behavior as a native
-     app chrome bar, so it never blocks content but is always reachable. */
+  /* ---------- Sticky header state ---------- */
   var header = document.querySelector(".site-header");
   if (header) {
-    var lastY = window.scrollY;
-    var headerH = header.offsetHeight;
     var onScroll = function () {
-      var y = window.scrollY;
-      header.classList.toggle("is-scrolled", y > 8);
-
-      if (links && links.classList.contains("is-open")) {
-        header.classList.remove("is-hidden");
-        lastY = y;
-        return;
-      }
-
-      if (y > lastY && y > headerH * 1.5) {
-        header.classList.add("is-hidden");
-      } else if (y < lastY) {
-        header.classList.remove("is-hidden");
-      }
-      lastY = y;
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
+
+  /* ---------- Media placeholders ----------
+     Any .media-placeholder that contains an <img> is checked here:
+     if the file actually loads, the placeholder box swaps to show
+     the real photo and hides the "assets/images/..." label. If the
+     file is missing (404), the placeholder look stays as-is. This
+     means dropping a correctly-named image into /assets/images/...
+     and pushing is enough — no HTML edits needed. */
+  document.querySelectorAll(".media-placeholder img").forEach(function (img) {
+    var box = img.closest(".media-placeholder");
+    var reveal = function () { box.classList.add("has-image"); };
+    if (img.complete && img.naturalWidth > 0) {
+      reveal();
+    } else {
+      img.addEventListener("load", reveal);
+    }
+    img.addEventListener("error", function () { img.remove(); });
+  });
 
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll("[data-reveal]");

@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/portfolio.css" />
@@ -37,7 +37,6 @@
     <section class="page-head container">
       <p class="label" data-reveal>Portfolio</p>
       <h1 data-reveal>Technology &amp; photography.</h1>
-      <p class="lede" data-reveal>Two software and research projects, and an ongoing photography practice — presented as two different, equally serious ways of paying attention.</p>
     </section>
 
     <nav class="world-nav container" aria-label="Portfolio sections">
@@ -46,104 +45,55 @@
     </nav>
 
     <!-- ================= TECHNOLOGY ================= -->
-    <section id="technology" class="section container" style="padding-block: 0;">
-      <p class="label" data-reveal style="margin-top: clamp(3rem, 6vw, 4rem);">01 — Technology</p>
+    <section id="technology" class="section container">
+      <p class="label" data-reveal>01 — Technology</p>
 
-      <!-- Playnck — dominant, product case study -->
-      <article class="project--featured" data-reveal>
+      <article class="project" data-reveal>
         <div class="project__media">
-          <div class="media-placeholder" data-src="assets/images/projects/playnck.jpg" data-alt="Playnck desktop music player" data-eager>
+          <div class="media-placeholder">
+            <img src="assets/images/projects/playnck.jpg" alt="Playnck music player screenshot">
             <span class="media-placeholder__label">assets/images/projects/playnck.jpg</span>
           </div>
         </div>
-        <div class="project__grid">
-          <div>
-            <span class="project-index">Project 01 · Software</span>
-            <h2 class="project__title">Playnck</h2>
+        <div class="project__body">
+          <span class="project__index mono">01</span>
+          <h3 class="project__title">Playnck</h3>
+          <p class="project__desc">A music player application, built with attention to interface detail — from playback controls to the small interactions around a listening session.</p>
+          <div class="project__meta">
+            <span>Music player</span>
+            <span>Software</span>
           </div>
-          <div>
-            <p class="project__desc">A desktop music player built with Electron, focused on interface detail — from playback controls to the small interactions around a listening session. It handles local library management, automatic metadata detection, album artwork, playlists and fast search, wrapped in a custom, themeable interface.</p>
-            <div class="project__meta">
-              <span>Electron</span>
-              <span>HTML / CSS / JS</span>
-              <span>Node.js</span>
-              <span>Desktop app</span>
-            </div>
-            <div class="project__link">
-              <a class="link-arrow" href="https://github.com/FakharArrazi/Project-Playnck" target="_blank" rel="noopener">
-                View on GitHub
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </a>
-            </div>
+          <div class="project__link">
+            <a class="link-arrow" href="https://github.com/FakharArrazi/Project-Playnck" target="_blank" rel="noopener">
+              View on GitHub
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
           </div>
         </div>
       </article>
 
-      <!-- FANET / NS-3 — research / engineering case study -->
-      <article class="project--research" data-reveal>
-        <div>
-          <span class="project-index">Project 02 · Research</span>
-          <h2 class="project__title">FANET / NS-3</h2>
-          <p class="project__desc">A networking research and simulation project centered on Flying Ad-hoc Networks (FANET) — mobile aerial nodes that form and maintain a network without fixed infrastructure. Built using the NS-3 network simulator to study routing behavior, mobility and performance as nodes move.</p>
-
-          <dl class="spec-list">
-            <div class="spec-row">
-              <dt>Focus</dt>
-              <dd>UAV / drone ad-hoc network performance</dd>
-            </div>
-            <div class="spec-row">
-              <dt>Simulator</dt>
-              <dd>NS-3</dd>
-            </div>
-            <div class="spec-row">
-              <dt>Protocols</dt>
-              <dd>AODV · OLSR · DSDV · DSR</dd>
-            </div>
-            <div class="spec-row">
-              <dt>Study</dt>
-              <dd>Mobility models &amp; routing performance under motion</dd>
-            </div>
-          </dl>
-
+      <article class="project" data-reveal>
+        <div class="project__media">
+          <div class="media-placeholder">
+            <img src="assets/images/projects/fanet-ns3.jpg" alt="FANET / NS-3 simulation screenshot">
+            <span class="media-placeholder__label">assets/images/projects/fanet-ns3.jpg</span>
+          </div>
+        </div>
+        <div class="project__body">
+          <span class="project__index mono">02</span>
+          <h3 class="project__title">FANET / NS-3</h3>
+          <p class="project__desc">A networking research and simulation project centered on Flying Ad-hoc Networks (FANET), built using the NS-3 network simulator to study how mobile aerial nodes communicate and coordinate.</p>
+          <div class="project__meta">
+            <span>Networking research</span>
+            <span>NS-3 simulation</span>
+            <span>FANET</span>
+          </div>
           <div class="project__link">
             <a class="link-arrow" href="https://github.com/FakharArrazi" target="_blank" rel="noopener">
               View on GitHub
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
-        </div>
-
-        <div class="network-diagram" aria-hidden="true">
-          <svg viewBox="0 0 320 280">
-            <g class="nd-node--ground">
-              <path class="nd-link" d="M160 240 L70 120"></path>
-              <path class="nd-link" d="M160 240 L160 70"></path>
-              <path class="nd-link" d="M160 240 L250 130"></path>
-            </g>
-            <path class="nd-link nd-link--active" d="M70 120 L160 70"></path>
-            <path class="nd-link nd-link--active" d="M160 70 L250 130"></path>
-            <path class="nd-link" d="M70 120 L250 130"></path>
-
-            <g class="nd-node">
-              <circle class="nd-pulse" cx="70" cy="120" r="10"></circle>
-              <circle cx="70" cy="120" r="5.5"></circle>
-              <text x="70" y="105" text-anchor="middle">UAV 01</text>
-            </g>
-            <g class="nd-node">
-              <circle class="nd-pulse nd-pulse--d2" cx="160" cy="70" r="10"></circle>
-              <circle cx="160" cy="70" r="5.5"></circle>
-              <text x="160" y="55" text-anchor="middle">UAV 02</text>
-            </g>
-            <g class="nd-node">
-              <circle class="nd-pulse nd-pulse--d3" cx="250" cy="130" r="10"></circle>
-              <circle cx="250" cy="130" r="5.5"></circle>
-              <text x="250" y="115" text-anchor="middle">UAV 03</text>
-            </g>
-            <g class="nd-node nd-node--ground">
-              <circle cx="160" cy="240" r="6"></circle>
-              <text x="160" y="262" text-anchor="middle">GROUND STATION</text>
-            </g>
-          </svg>
         </div>
       </article>
     </section>
@@ -170,16 +120,12 @@
 
   <footer class="site-footer container">
     <div class="footer__grid">
-      <span>
-        <span class="footer__name display">Aidoudi El Fakhar Arrazi</span>
-        <span class="footer__tag">Computer Science · Networks &amp; Distributed Systems</span>
-      </span>
+      <span class="footer__name display">Aidoudi El Fakhar Arrazi</span>
       <nav class="footer__links" aria-label="Footer">
         <a href="index.html">Home</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="about.html">About</a>
         <a href="cv.html">CV</a>
-        <a href="assets/cv/cv.pdf" download>CV (PDF)</a>
         <a href="https://github.com/FakharArrazi" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -191,7 +137,6 @@
 
   <!-- Lightbox -->
   <div class="lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
-    <span class="lightbox__counter" data-lightbox-counter></span>
     <button class="lightbox__prev" data-lightbox-prev aria-label="Previous photograph">&larr; Prev</button>
     <figure class="lightbox__figure">
       <div class="lightbox__media" data-lightbox-img></div>

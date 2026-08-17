@@ -1,19 +1,10 @@
 /* Home page — index.html */
 
-/* ---------- Hero ---------- */
-
 .hero {
-  padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3rem, 7vw, 5.5rem);
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem);
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: center;
+  gap: 1.75rem;
 }
-@media (max-width: 960px) {
-  .hero { grid-template-columns: 1fr; }
-}
-
-.hero__copy { max-width: 46rem; }
 
 .hero__eyebrow {
   display: flex;
@@ -22,153 +13,67 @@
 }
 .hero__eyebrow::before {
   content: "";
-  width: 26px;
+  width: 28px;
   height: 1px;
   background: var(--ink);
 }
 
 .hero__name {
-  margin-top: 1.1rem;
-  max-width: 13ch;
+  max-width: 16ch;
 }
 
 .hero__statement {
-  margin-top: 1.5rem;
-  font-family: var(--font-body);
-  font-size: var(--step-1);
-  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
   color: var(--ink-soft);
-  letter-spacing: -0.005em;
-  max-width: 34ch;
-  line-height: 1.5;
+  letter-spacing: 0.01em;
+  max-width: 46ch;
 }
+.hero__statement span { color: var(--muted); }
 
-.hero__ctas {
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  flex-wrap: wrap;
-  margin-top: 2.25rem;
-}
+/* ---------- Intro ---------- */
 
-.hero__portrait { position: relative; }
-.hero__portrait .media-placeholder { --ph-ratio: 4 / 5; box-shadow: var(--shadow-md); }
-@media (max-width: 960px) {
-  .hero__portrait { max-width: 22rem; }
-}
-
-/* ---------- Intro (editorial triplet) ---------- */
-
-.intro-statement {
+.intro {
   display: grid;
-  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
 }
-@media (max-width: 860px) { .intro-statement { grid-template-columns: 1fr; } }
 
-.intro-statement__lines {
-  font-family: var(--font-display);
-  font-size: var(--step-3);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.25;
+@media (max-width: 860px) {
+  .intro { grid-template-columns: 1fr; }
 }
-.intro-statement__lines span { display: block; color: var(--ink); }
-.intro-statement__lines span:nth-child(2) { color: var(--ink-soft); }
-.intro-statement__lines span:nth-child(3) { color: var(--muted); }
-
-.intro-statement__body { padding-top: 0.4rem; }
 
 /* ---------- What I do ---------- */
 
-.focus-list { border-top: 1px solid var(--line-soft); }
+.focus-list { border-top: 1px solid var(--line); }
 
 .focus-item {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) minmax(0, 1.4fr);
+  grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 1.4fr);
   gap: clamp(1rem, 3vw, 2.5rem);
   align-items: baseline;
-  padding-block: clamp(1.6rem, 3vw, 2.35rem);
-  border-bottom: 1px solid var(--line-soft);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
 }
 
 @media (max-width: 720px) {
-  .focus-item { grid-template-columns: 2.25rem 1fr; row-gap: 0.5rem; }
+  .focus-item { grid-template-columns: 2.5rem 1fr; row-gap: 0.5rem; }
   .focus-item__desc { grid-column: 2 / -1; }
 }
 
 .focus-item__index { font-family: var(--font-mono); color: var(--muted); font-size: var(--step--1); }
-.focus-item__title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em; font-size: var(--step-2); }
-.focus-item__desc { color: var(--ink-soft); max-width: 42ch; line-height: 1.55; }
-
-/* ---------- Selected work (home preview) ---------- */
-
-.work-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-}
-.work-head h2 { max-width: 16ch; }
-
-.work-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 3vw, 2rem);
-}
-
-.work-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: clamp(1.75rem, 4vw, 3.5rem);
-  align-items: center;
-  padding: clamp(1.75rem, 3vw, 2.75rem);
-  border-radius: var(--r-lg);
-  border: 1px solid var(--line-soft);
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease), transform var(--med) var(--ease);
-}
-.work-card:hover { border-color: var(--line); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-.work-card .media-placeholder { --ph-ratio: 16 / 11; }
-.work-card:hover .media-placeholder img { transform: scale(1.02); }
-
-.work-card--secondary { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
-.work-card--secondary .project__media { order: 2; }
-@media (max-width: 860px) {
-  .work-card, .work-card--secondary { grid-template-columns: 1fr; }
-  .work-card--secondary .project__media { order: 0; }
-}
-
-.work-card__index { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
-.work-card__title { margin-top: 0.6rem; font-size: var(--step-2); }
-.work-card__desc { margin-top: 0.85rem; color: var(--ink-soft); max-width: 38ch; line-height: 1.55; }
-.work-card__link { margin-top: 1.5rem; }
-
-/* ---------- Photography preview ---------- */
-
-.photo-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(0.6rem, 1.5vw, 1.25rem);
-}
-.photo-preview-grid .gallery__item:nth-child(1) { grid-column: span 3; }
-.photo-preview-grid .gallery__item:nth-child(2) { grid-column: span 2; }
-.photo-preview-grid .gallery__item:nth-child(3) { grid-column: span 1; }
-@media (max-width: 720px) {
-  .photo-preview-grid { grid-template-columns: repeat(2, 1fr); }
-  .photo-preview-grid .gallery__item:nth-child(1) { grid-column: span 2; }
-  .photo-preview-grid .gallery__item:nth-child(2),
-  .photo-preview-grid .gallery__item:nth-child(3) { grid-column: span 1; }
-}
+.focus-item__title { font-family: var(--font-display); font-size: var(--step-2); }
+.focus-item__desc { color: var(--muted); max-width: 42ch; }
 
 /* ---------- CTA / transition to portfolio ---------- */
 
 .cta-block {
   text-align: center;
-  padding-block: clamp(4.5rem, 10vw, 7.5rem);
-  border-top: 1px solid var(--line-soft);
+  padding-block: clamp(4rem, 10vw, 7rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.cta-block h2 { max-width: 22ch; margin-inline: auto; }
-.cta-block__row { display: flex; justify-content: center; gap: 1.75rem; flex-wrap: wrap; margin-top: 2.25rem; }
+.cta-block h2 { max-width: 20ch; margin-inline: auto; }
+.cta-block .link-arrow { margin-top: 2rem; justify-content: center; }
+.cta-block__row { display: flex; justify-content: center; }
