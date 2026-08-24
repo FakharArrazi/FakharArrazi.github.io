@@ -192,6 +192,7 @@ p.lede { font-size: var(--step-1); color: var(--ink-soft); line-height: 1.55; ma
 }
 
 .nav__links a {
+  display: block;
   position: relative;
   font-family: var(--font-mono);
   font-size: var(--step--1);
