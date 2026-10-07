@@ -1,76 +1,60 @@
-/* main.js — shared behavior across every page:
-   mobile navigation toggle, sticky header shadow on scroll,
-   and a lightweight scroll-reveal for [data-reveal] elements. */
-
+/* main.js: header state, mobile menu, scroll reveal, footer year. */
 (function () {
   "use strict";
 
-  /* ---------- Mobile nav ---------- */
-  var toggle = document.querySelector(".nav__toggle");
-  var links = document.querySelector(".nav__links");
-
-  if (toggle && links) {
-    toggle.addEventListener("click", function () {
-      var isOpen = links.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      document.body.classList.toggle("nav-open", isOpen);
-    });
-
-    links.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        links.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("nav-open");
-      });
-    });
-  }
-
-  /* ---------- Sticky header state ---------- */
   var header = document.querySelector(".site-header");
   if (header) {
-    var onScroll = function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
+    var onScroll = function () { header.classList.toggle("is-scrolled", window.scrollY > 8); };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* ---------- Media placeholders ----------
-     Any .media-placeholder that contains an <img> is checked here:
-     if the file actually loads, the placeholder box swaps to show
-     the real photo and hides the "assets/images/..." label. If the
-     file is missing (404), the placeholder look stays as-is. This
-     means dropping a correctly-named image into /assets/images/...
-     and pushing is enough — no HTML edits needed. */
-  document.querySelectorAll(".media-placeholder img").forEach(function (img) {
-    var box = img.closest(".media-placeholder");
-    var reveal = function () { box.classList.add("has-image"); };
-    if (img.complete && img.naturalWidth > 0) {
-      reveal();
-    } else {
-      img.addEventListener("load", reveal);
-    }
-    img.addEventListener("error", function () { img.remove(); });
-  });
+  /* Mobile menu */
+  var btn = document.querySelector(".menu-btn");
+  var menu = document.getElementById("menu");
+  if (btn && menu) {
+    var closeBtn = menu.querySelector(".menu__close");
+    var setOpen = function (open) {
+      menu.classList.toggle("is-open", open);
+      menu.setAttribute("aria-hidden", String(!open));
+      if (open) { menu.removeAttribute("inert"); } else { menu.setAttribute("inert", ""); }
+      btn.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-locked", open);
+      if (open && closeBtn) { closeBtn.focus(); } else if (!open) { btn.focus({ preventScroll: true }); }
+    };
+    btn.addEventListener("click", function () { setOpen(true); });
+    if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });
+    menu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        menu.classList.remove("is-open");
+        menu.setAttribute("aria-hidden", "true");
+        menu.setAttribute("inert", "");
+        btn.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("is-locked");
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.classList.contains("is-open")) setOpen(false);
+    });
+    window.matchMedia("(min-width: 860px)").addEventListener("change", function (m) {
+      if (m.matches && menu.classList.contains("is-open")) setOpen(false);
+    });
+  }
 
-  /* ---------- Scroll reveal ---------- */
-  var revealEls = document.querySelectorAll("[data-reveal]");
-  if (revealEls.length) {
+  /* Scroll reveal */
+  var els = document.querySelectorAll("[data-reveal]");
+  if (els.length) {
     if ("IntersectionObserver" in window) {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
-      );
-      revealEls.forEach(function (el) { observer.observe(el); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -6% 0px" });
+      els.forEach(function (el) { io.observe(el); });
     } else {
-      revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+      els.forEach(function (el) { el.classList.add("is-in"); });
     }
   }
+
+  document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

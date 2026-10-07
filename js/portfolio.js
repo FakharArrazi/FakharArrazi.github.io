@@ -1,133 +1,57 @@
-/* portfolio.js — drag/swipe carousel for project & photo galleries.
-   Works with mouse (pointer events), touch, prev/next buttons,
-   dot navigation, and left/right arrow keys when a carousel is focused. */
-
+/* portfolio.js: sticky chapter index with scroll spy, and gallery expansion. */
 (function () {
   "use strict";
 
-  /* Slides beyond the first use data-src instead of src, so nothing
-     downloads until the gallery is actually near the viewport. This is
-     done manually (not via the native loading="lazy" attribute) because
-     .media-placeholder hides its <img> with display:none until main.js
-     confirms it loaded — and native lazy-loading doesn't reliably fire
-     on elements with no layout box. */
-  function lazyLoadSlides(root) {
-    var imgs = Array.prototype.slice.call(root.querySelectorAll("img[data-src]"));
-    if (!imgs.length) return;
-
-    var load = function () {
-      imgs.forEach(function (img) {
-        if (img.dataset.src) {
-          img.src = img.dataset.src;
-          img.removeAttribute("data-src");
-        }
-      });
-    };
-
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            load();
-            io.disconnect();
-          }
-        });
-      }, { rootMargin: "600px 0px" });
-      io.observe(root);
-    } else {
-      load();
-    }
-  }
-
-  function initCarousel(root) {
-    var viewport = root.querySelector("[data-carousel-viewport]");
-    var track = root.querySelector("[data-carousel-track]");
-    var slides = Array.prototype.slice.call(root.querySelectorAll(".carousel__slide"));
-    var prevBtn = root.querySelector("[data-carousel-prev]");
-    var nextBtn = root.querySelector("[data-carousel-next]");
-    var dotsWrap = root.querySelector("[data-carousel-dots]");
-
-    if (!viewport || !track || slides.length === 0) return;
-
-    var index = 0;
-    var dragging = false;
-    var startX = 0;
-    var dragDelta = 0;
-    var viewportWidth = 0;
-    var dots = [];
-
-    if (slides.length <= 1) {
-      root.setAttribute("data-single", "");
-    }
-
-    if (dotsWrap && slides.length > 1) {
-      slides.forEach(function (_, i) {
-        var dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = "carousel__dot";
-        dot.setAttribute("aria-label", "Go to image " + (i + 1) + " of " + slides.length);
-        dot.addEventListener("click", function () { goTo(i); });
-        dotsWrap.appendChild(dot);
-        dots.push(dot);
-      });
-    }
-
-    function render() {
-      track.style.transform = "translateX(" + index * -100 + "%)";
-      dots.forEach(function (d, i) { d.classList.toggle("is-active", i === index); });
-      if (prevBtn) prevBtn.disabled = index === 0;
-      if (nextBtn) nextBtn.disabled = index === slides.length - 1;
-    }
-
-    function goTo(i) {
-      index = Math.max(0, Math.min(slides.length - 1, i));
-      render();
-    }
-
-    if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); });
-    if (nextBtn) nextBtn.addEventListener("click", function () { goTo(index + 1); });
-
-    viewport.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft") { e.preventDefault(); goTo(index - 1); }
-      else if (e.key === "ArrowRight") { e.preventDefault(); goTo(index + 1); }
+  /* Gallery expansion */
+  document.querySelectorAll("[data-expand]").forEach(function (btn) {
+    var target = document.getElementById(btn.getAttribute("data-expand"));
+    if (!target) return;
+    var label = btn.getAttribute("data-label-open");
+    var closed = btn.textContent;
+    btn.addEventListener("click", function () {
+      var open = target.hasAttribute("hidden");
+      if (open) { target.removeAttribute("hidden"); } else { target.setAttribute("hidden", ""); }
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? label : closed;
+      if (open) {
+        target.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("is-in"); });
+      }
     });
+  });
 
-    if (slides.length > 1) {
-      viewport.addEventListener("pointerdown", function (e) {
-        if (e.target.closest(".carousel__btn")) return; // let the button handle its own click
-        dragging = true;
-        startX = e.clientX;
-        dragDelta = 0;
-        viewportWidth = viewport.getBoundingClientRect().width || 1;
-        track.classList.add("is-dragging");
-        try { viewport.setPointerCapture(e.pointerId); } catch (err) { /* noop */ }
-      });
+  /* Scroll spy */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".index-bar a"));
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  var map = {};
+  links.forEach(function (a) {
+    var id = a.getAttribute("href").slice(1);
+    var sec = document.getElementById(id);
+    if (sec) map[id] = { link: a, sec: sec };
+  });
 
-      viewport.addEventListener("pointermove", function (e) {
-        if (!dragging) return;
-        dragDelta = e.clientX - startX;
-        track.style.transform = "translateX(calc(" + index * -100 + "% + " + dragDelta + "px))";
-      });
-
-      var endDrag = function () {
-        if (!dragging) return;
-        dragging = false;
-        track.classList.remove("is-dragging");
-        var threshold = viewportWidth * 0.15;
-        if (dragDelta < -threshold && index < slides.length - 1) index += 1;
-        else if (dragDelta > threshold && index > 0) index -= 1;
-        dragDelta = 0;
-        render();
-      };
-
-      viewport.addEventListener("pointerup", endDrag);
-      viewport.addEventListener("pointercancel", endDrag);
-      viewport.addEventListener("pointerleave", function () { if (dragging) endDrag(); });
+  function activate(id) {
+    links.forEach(function (a) {
+      var on = a.getAttribute("href") === "#" + id;
+      if (on) { a.setAttribute("aria-current", "true"); } else { a.removeAttribute("aria-current"); }
+    });
+    var cur = map[id] && map[id].link;
+    var bar = document.querySelector(".index-bar__scroll");
+    if (cur && bar && bar.scrollWidth > bar.clientWidth) {
+      var left = cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2;
+      bar.scrollTo({ left: left, behavior: "smooth" });
     }
-
-    render();
-    lazyLoadSlides(root);
   }
 
-  document.querySelectorAll(".carousel").forEach(initCarousel);
+  var visible = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
+    var best = null, bestR = 0;
+    Object.keys(visible).forEach(function (id) { if (visible[id] > bestR) { best = id; bestR = visible[id]; } });
+    if (best) { activate(best); } else {
+      links.forEach(function (a) { a.removeAttribute("aria-current"); });
+      var bar = document.querySelector(".index-bar__scroll");
+      if (bar && bar.scrollLeft) bar.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.01, 0.1, 0.3, 0.6, 1] });
+  Object.keys(map).forEach(function (id) { io.observe(map[id].sec); });
 })();
